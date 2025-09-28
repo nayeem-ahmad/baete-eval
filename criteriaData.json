@@ -1,0 +1,276 @@
+[
+    {
+        "title": "Organization and Governance",
+        "sub_criteria": [
+            {
+                "text": "Major positions of the institution must be filled.",
+                "questions": ["Are major positions of the institution filled?"]
+            },
+            {
+                "text": "The statutory bodies/committees of the institution must be formed in accordance with the applicable rules and guidelines.",
+                "questions": ["Are the statutory bodies/committees of the institution formed in accordance with the applicable rules and guidelines?"]
+            },
+            {
+                "text": "The position appointees and committee members must function effectively as per the roles defined in the relevant act/statute.",
+                "questions": ["Do the position appointees and committee members function effectively as per the roles defined in the relevant act/statute?"]
+            },
+            {
+                "text": "The institution must have published policies including a mechanism for addressing grievance.",
+                "questions": ["Does the institution have published policies?", "Does the institution have a mechanism for addressing grievance?"]
+            },
+            {
+                "text": "The academic and administrative policies must be put into practice.",
+                "questions": ["Are the academic and administrative policies put into practice?"]
+            }
+        ]
+    },
+    {
+        "title": "Financial and Physical Resources",
+        "sub_criteria": [
+            {
+                "text": "The financial resources of the institution must be adequate to fulfill its mission and vision.",
+                "questions": ["Are the financial resources of the institution adequate to fulfill its mission and vision?"]
+            },
+            {
+                "text": "The institution must have a process for budget planning and allocate resources to the priority areas as required.",
+                "questions": ["Does the institution have a process for budget planning?", "Does the institution allocate resources to the priority areas as required?"]
+            },
+            {
+                "text": "The campus infrastructure... must be adequate for the total number of students and employees at the institution.",
+                "questions": ["Is the campus infrastructure adequate for the total number of students and employees at the institution?"]
+            },
+            {
+                "text": "The possibility of any risk from manmade or natural hazards should be properly assessed and addressed in the Safety Plan...",
+                "questions": ["Is the possibility of any risk from manmade or natural hazards properly assessed and addressed in the Safety Plan?"]
+            },
+            {
+                "text": "Fire detection and firefighting facilities must be adequate.",
+                "questions": ["Are fire detection and firefighting facilities adequate?"]
+            },
+            {
+                "text": "All labs must have their own plans to prevent and manage incidents and accidents.",
+                "questions": ["Do all labs have their own plans to prevent and manage incidents and accidents?"]
+            }
+        ]
+    },
+    {
+        "title": "Faculty",
+        "sub_criteria": [
+             {
+                "text": "The department must have a sufficient number of full-time faculty members to ensure that the faculty are not overloaded...",
+                "questions": ["Does the department have a sufficient number of full-time faculty members to ensure that the faculty are not overloaded?"]
+            },
+            {
+                "text": "The proportion of senior faculty members and junior faculty members should be appropriate.",
+                "questions": ["Is the proportion of senior faculty members and junior faculty members appropriate?"]
+            },
+            {
+                "text": "The teacher-student ratio, class size and teaching load must not compromise opportunities for interaction.",
+                "questions": ["Does the teacher-student ratio compromise opportunities for interaction?", "Does the class size compromise opportunities for interaction?", "Does the teaching load compromise opportunities for interaction?"]
+            },
+            {
+                "text": "The faculty members must have adequate academic qualifications with specializations in areas closely related to the program(s)...",
+                "questions": ["Do the faculty members have adequate academic qualifications with specializations in areas closely related to the program(s)?"]
+            },
+            {
+                "text": "Faculty members should be motivated to improve their pedagogy and assist the students in achieving outcomes.",
+                "questions": ["Are faculty members motivated to improve their pedagogy and assist the students in achieving outcomes?"]
+            },
+            {
+                "text": "Faculty members must have the responsibility and authority to design and update the curriculum, establish course and program outcomes...",
+                "questions": ["Do faculty members have the responsibility and authority to design and update the curriculum?", "Do faculty members have the responsibility and authority to establish course and program outcomes?"]
+            },
+            {
+                "text": "Faculty members must be engaged in research, development and professional activities such as consulting.",
+                "questions": ["Are faculty members engaged in research, development and professional activities such as consulting?"]
+            },
+            {
+                "text": "The institution or department must periodically arrange training for the faculty members on outcome-based education and assessment.",
+                "questions": ["Does the institution or department periodically arrange training for the faculty members on outcome-based education and assessment?"]
+            }
+        ]
+    },
+     {
+        "title": "Students",
+        "sub_criteria": [
+            {
+                "text": "There must be a published policy for the admission and transfer of students into the program.",
+                "questions": ["Is there a published policy for the admission of students into the program?", "Is there a published policy for the transfer of students into the program?"]
+            },
+            {
+                "text": "The policy must be implemented in practice. Transfer students must also show the attainment of program outcomes from courses in the institution.",
+                "questions": ["Is the policy implemented in practice?", "Do transfer students show the attainment of program outcomes from courses in the institution?"]
+            },
+            {
+                "text": "Students' academic performance must be continuously monitored in terms of the achievement of outcomes, and feedback should be provided to the students.",
+                "questions": ["Are students' academic performance continuously monitored in terms of the achievement of outcomes?", "Is feedback provided to the students?"]
+            },
+            {
+                "text": "Every student must be assigned an advisor.",
+                "questions": ["Is every student assigned an advisor?"]
+            },
+            {
+                "text": "Students must have opportunities to participate in extra- and co-curricular activities and the activities of relevant professional societies.",
+                "questions": ["Do students have opportunities to participate in extra- and co-curricular activities?", "Do students have opportunities to participate in the activities of relevant professional societies?"]
+            }
+        ]
+    },
+    {
+        "title": "Academic Facilities and Technical Support",
+         "sub_criteria": [
+            {
+                "text": "The institution must have a well-stocked library.",
+                "questions": ["Does the institution have a well-stocked library?"]
+            },
+            {
+                "text": "The number of classrooms available must be adequate to properly run the program.",
+                "questions": ["Is the number of classrooms available adequate to properly run the program?"]
+            },
+            {
+                "text": "The number of laboratories and equipment must be adequate for conducting the program's various laboratory courses.",
+                "questions": ["Is the number of laboratories adequate for conducting the program's various laboratory courses?", "Is the equipment adequate for conducting the program's various laboratory courses?"]
+            },
+            {
+                "text": "Every student must have the opportunity for hands-on activity in the laboratories.",
+                "questions": ["Does every student have the opportunity for hands-on activity in the laboratories?"]
+            },
+            {
+                "text": "Students and faculty members must have access to adequate computing and Internet facilities, including hardware, software tools and support.",
+                "questions": ["Do students and faculty members have access to adequate computing facilities?", "Do students and faculty members have access to adequate Internet facilities?", "Do students and faculty members have access to adequate hardware, software tools and support?"]
+            }
+        ]
+    },
+    {
+        "title": "Curriculum and Teaching-Learning Processes",
+        "sub_criteria": [
+             {
+                "text": "The curriculum must satisfy the relevant program-specific criteria.",
+                "questions": ["Does the curriculum satisfy the relevant program-specific criteria?"]
+            },
+            {
+                "text": "The breadth and depth of the curriculum must be appropriate for solving complex engineering problems in the relevant discipline.",
+                "questions": ["Is the breadth of the curriculum appropriate for solving complex engineering problems in the relevant discipline?", "Is the depth of the curriculum appropriate for solving complex engineering problems in the relevant discipline?"]
+            },
+            {
+                "text": "The curriculum must contain an adequate number of courses on mathematics, physical science, humanities and non-engineering subjects.",
+                "questions": ["Does the curriculum contain an adequate number of courses on mathematics?", "Does the curriculum contain an adequate number of courses on physical science?", "Does the curriculum contain an adequate number of courses on humanities and non-engineering subjects?"]
+            },
+            {
+                "text": "The teaching-learning processes and activities selected for each course must be effective and appropriate for achieving the relevant outcomes...",
+                "questions": ["Are the teaching-learning processes and activities selected for each course effective and appropriate for achieving the relevant outcomes?"]
+            },
+            {
+                "text": "Adequate hands-on activities must be an integral part of teaching and learning.",
+                "questions": ["Are adequate hands-on activities an integral part of teaching and learning?"]
+            },
+            {
+                "text": "The program must demonstrate the culmination of program outcomes (POs) at the level of solving complex engineering problems...",
+                "questions": ["Does the program demonstrate the culmination of program outcomes (POs) at the level of solving complex engineering problems?"]
+            }
+        ]
+    },
+    {
+        "title": "Program Educational Objectives",
+        "sub_criteria": [
+            {
+                "text": "Published PEOs must be clear, concise, assessable and realistic within the context of the available resources.",
+                "questions": ["Are published PEOs clear, concise, assessable and realistic within the context of the available resources?"]
+            },
+            {
+                "text": "PEOs must be consistent with the vision and mission of the institution or the department offering the program.",
+                "questions": ["Are PEOs consistent with the vision and mission of the institution or the department offering the program?"]
+            },
+            {
+                "text": "Curriculum and teaching-learning processes must support the attainment of PEOs.",
+                "questions": ["Does curriculum support the attainment of PEOs?", "Do teaching-learning processes support the attainment of PEOs?"]
+            },
+            {
+                "text": "A process must be developed to assess the level of attainment of each PEO to evaluate the academic program's effectiveness.",
+                "questions": ["Is a process developed to assess the level of attainment of each PEO to evaluate the academic program's effectiveness?"]
+            },
+            {
+                "text": "PEO assessment must lead to the periodic review of PEOs.",
+                "questions": ["Does PEO assessment lead to the periodic review of PEOs?"]
+            }
+        ]
+    },
+    {
+        "title": "Program Outcomes and Assessment",
+        "sub_criteria": [
+             {
+                "text": "POs specified by the program must be significantly equivalent to the twelve graduate attributes or POs of BAETE.",
+                "questions": ["Are POs specified by the program significantly equivalent to the twelve graduate attributes or POs of BAETE?"]
+            },
+            {
+                "text": "POs must contribute to each PEO.",
+                "questions": ["Do POs contribute to each PEO?"]
+            },
+            {
+                "text": "The process involved in defining and refining the POs must be described.",
+                "questions": ["Is the process involved in defining and refining the POs described?"]
+            },
+            {
+                "text": "The way in which each attribute of the Knowledge Profile (K1-K8) is addressed in the curriculum must be demonstrated through mapping.",
+                "questions": ["Is the way in which each attribute of the Knowledge Profile (K1-K8) is addressed in the curriculum demonstrated through mapping?"]
+            },
+            {
+                "text": "A course file must be maintained for each course.",
+                "questions": ["Is a course file maintained for each course?"]
+            },
+            {
+                "text": "POs must be assessed using direct methods.",
+                "questions": ["Are POs assessed using direct methods?"]
+            },
+            {
+                "text": "It must be demonstrated through evidence from appropriate evaluation that the students attain all the POs by the time of the graduation.",
+                "questions": ["Is it demonstrated through evidence from appropriate evaluation that the students attain all the POs by the time of graduation?"]
+            }
+        ]
+    },
+    {
+        "title": "Continuous Quality Improvement",
+        "sub_criteria": [
+            {
+                "text": "The program must demonstrate an established system for periodically compiling the level of attainment of PEOs...",
+                "questions": ["Does the program demonstrate an established system for periodically compiling the level of attainment of PEOs?"]
+            },
+            {
+                "text": "The findings of the CQI exercises for PEOs must be evaluated, and the identified shortcomings and limitations must be used to refine and improve the program.",
+                "questions": ["Are the findings of the CQI exercises for PEOs evaluated?", "Are the identified shortcomings and limitations used to refine and improve the program?"]
+            },
+            {
+                "text": "POs must be assessed on a regular cycle.",
+                "questions": ["Are POs assessed on a regular cycle?"]
+            },
+            {
+                "text": "Each course must have clear quality requirements and facilitate the achievement of COs through teaching-learning and assessment methods.",
+                "questions": ["Does each course have clear quality requirements?", "Does each course facilitate the achievement of COs through teaching-learning and assessment methods?"]
+            },
+            {
+                "text": "The concerned course instructor must prepare course review reports including CQI files for the courses he/she is teaching.",
+                "questions": ["Does the concerned course instructor prepare course review reports including CQI files for the courses he/she is teaching?"]
+            },
+            {
+                "text": "The program must evaluate the curriculum and teaching quality on a regular basis while considering feedback from faculty members and students.",
+                "questions": ["Does the program evaluate the curriculum and teaching quality on a regular basis while considering feedback from faculty members and students?"]
+            }
+        ]
+    },
+    {
+        "title": "Interactions with the Industry",
+        "sub_criteria": [
+            {
+                "text": "The industry must participate in the development of the curriculum to ensure that it is relevant, regularly updated, and meets the needs of the industry...",
+                "questions": ["Does the industry participate in the development of the curriculum to ensure that it is relevant, regularly updated, and meets the needs of the industry?"]
+            },
+            {
+                "text": "The program should have an Industry Advisory Panel (IAP) and an Alumni Association (AA) for this purpose.",
+                "questions": ["Does the program have an Industry Advisory Panel (IAP) for this purpose?", "Does the program have an Alumni Association (AA) for this purpose?"]
+            },
+            {
+                "text": "The program must provide students with the opportunity to obtain industrial experience through internships, industry visits or design projects...",
+                "questions": ["Does the program provide students with the opportunity to obtain industrial experience through internships?", "Does the program provide students with the opportunity to obtain industrial experience through industry visits?", "Does the program provide students with the opportunity to obtain industrial experience through design projects?"]
+            }
+        ]
+    }
+]

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAETE Mobile Evaluator</title>
+    <link href="./public/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+    <div id="app">
+        <!-- App content will be rendered here -->
+        <div style="padding: 20px; text-align: center;">
+            <h1>Loading BAETE Mobile Evaluator...</h1>
+            <p>If this message persists, there may be a JavaScript loading issue.</p>
+        </div>
+    </div>
+
+    <!-- Using Vue.js production build -->
+    <script src="./public/vue.prod.js"></script>
+    
+    <script type="module">
+        const { createApp, ref, computed, onMounted } = Vue;
+
+        const App = {
+            setup() {
+                // STATE MANAGEMENT
+                const evaluations = ref([]);
+                const currentView = ref('dashboard'); // dashboard, criteria, sub-criterion, summary, final-summary
+                const selectedEvaluationIndex = ref(null);
+                const selectedCriterionIndex = ref(null);
+                const selectedSubCriterionIndex = ref(null);
+                const currentQuestionIndex = ref(0);
+                const isModalOpen = ref(false);
+                const newProgramName = ref('');
+                const newUniversityName = ref('');
+                const proposedSubCriterionEvaluation = ref(null);
+
+                // DATA SOURCE - loaded from external JSON file
+                const criteriaData = ref([]);
+
+                const evaluationTypes = {
+                    COMPLIANCE: { text: "Compliance", desc: "The program satisfies the criterion.", class: 'eval-compliance' },
+                    CONCERN: { text: "Concern", desc: "Potential for future non-compliance exists.", class: 'eval-concern' },
+                    WEAKNESS: { text: "Weakness", desc: "Lacks strength of compliance, compromising quality.", class: 'eval-weakness' },
+                    DEFICIENCY: { text: "Deficiency", desc: "Criterion does not exist or is in an elementary stage.", class: 'eval-deficiency' }
+                };
+
+
+                // COMPUTED PROPERTIES
+                const currentEvaluation = computed(() => {
+                    return selectedEvaluationIndex.value !== null ? evaluations.value[selectedEvaluationIndex.value] : null;
+                });
+
+                const currentCriterion = computed(() => {
+                    return currentEvaluation.value && selectedCriterionIndex.value !== null ? currentEvaluation.value.criteria[selectedCriterionIndex.value] : null;
+                });
+
+                const currentSubCriterion = computed(() => {
+                    return currentCriterion.value && selectedSubCriterionIndex.value !== null ? currentCriterion.value.sub_criteria[selectedSubCriterionIndex.value] : null;
+                });
+                
+                const currentSubCriterionData = computed(() => {
+                    if (!currentCriterion.value || !criteriaData.value.length) return null;
+                     return criteriaData.value[selectedCriterionIndex.value].sub_criteria[selectedSubCriterionIndex.value];
+                });
+
+                const isCurrentSubCriterionMust = computed(() => {
+                    if (!currentSubCriterion.value) return false;
+                    return /must/i.test(currentSubCriterion.value.text);
+                });
+
+
+                // API BASE URL
+                const API_BASE = 'http://localhost:3000/api';
+
+                // DATA LOADING
+                const loadCriteriaData = async () => {
+                    try {
+                        const response = await fetch(`${API_BASE}/criteria-data`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        criteriaData.value = data;
+                    } catch (error) {
+                        console.error('Error loading criteria data:', error);
+                        alert('Error loading criteria data. Please make sure the server is running.');
+                    }
+                };
+
+                // SQLITE DATABASE OPERATIONS
+                const saveEvaluation = async (evaluationData) => {
+                    // This is now handled by individual API calls during the evaluation process
+                    console.log('Evaluation saved to database');
+                };
+
+                const loadEvaluations = async () => {
+                    try {
+                        const response = await fetch(`${API_BASE}/evaluations`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        
+                        // Transform the database format to match our app format
+                        evaluations.value = data.map(evaluation => ({
+                            id: evaluation.id,
+                            programName: evaluation.program_name,
+                            universityName: evaluation.university_name,
+                            criteria: [], // Will be loaded when needed
+                            completedCriteria: evaluation.completed_criteria || 0,
+                            totalCriteria: evaluation.total_criteria || 0
+                        }));
+                    } catch (error) {
+                        console.error('Error loading evaluations:', error);
+                        alert('Error loading evaluations. Please make sure the server is running.');
+                    }
+                };
+
+                const loadFullEvaluation = async (evaluationId) => {
+                    try {
+                        const response = await fetch(`${API_BASE}/evaluations/${evaluationId}`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        
+                        return {
+                            id: data.id,
+                            programName: data.program_name,
+                            universityName: data.university_name,
+                            criteria: data.criteria || []
+                        };
+                    } catch (error) {
+                        console.error('Error loading full evaluation:', error);
+                        alert('Error loading evaluation details.');
+                        return null;
+                    }
+                };
+
+                onMounted(async () => {
+                    await loadCriteriaData();
+                    await loadEvaluations();
+                });
+
+                // CORE LOGIC
+                const startNewEvaluation = async () => {
+                    if (!newProgramName.value || !newUniversityName.value) return;
+                    
+                    try {
+                        const response = await fetch(`${API_BASE}/evaluations`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                programName: newProgramName.value,
+                                universityName: newUniversityName.value
+                            })
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        
+                        const newEval = await response.json();
+                        
+                        // Add to local list
+                        evaluations.value.push({
+                            id: newEval.id,
+                            programName: newEval.program_name,
+                            universityName: newEval.university_name,
+                            criteria: [],
+                            completedCriteria: 0,
+                            totalCriteria: criteriaData.value.length
+                        });
+                        
+                        await selectEvaluation(evaluations.value.length - 1);
+                        closeModal();
+                    } catch (error) {
+                        console.error('Error creating evaluation:', error);
+                        alert('Error creating evaluation. Please try again.');
+                    }
+                };
+                
+                const selectEvaluation = async (index) => {
+                    selectedEvaluationIndex.value = index;
+                    const selectedEval = evaluations.value[index];
+                    
+                    // Load full evaluation data if not already loaded
+                    if (!selectedEval.criteria || selectedEval.criteria.length === 0) {
+                        const fullEval = await loadFullEvaluation(selectedEval.id);
+                        if (fullEval) {
+                            evaluations.value[index] = fullEval;
+                        }
+                    }
+                    
+                    currentView.value = 'criteria';
+                };
+
+                const selectCriterion = (index) => {
+                    selectedCriterionIndex.value = index;
+                    selectedSubCriterionIndex.value = 0; 
+                    currentQuestionIndex.value = 0;
+                    currentView.value = 'sub-criterion';
+                };
+
+                const navigateSubCriterion = (direction) => {
+                    const nextIndex = selectedSubCriterionIndex.value + direction;
+                    if (nextIndex >= 0 && nextIndex < currentCriterion.value.sub_criteria.length) {
+                        selectedSubCriterionIndex.value = nextIndex;
+                        currentQuestionIndex.value = 0;
+                        proposedSubCriterionEvaluation.value = null;
+                    } else {
+                        updateCriterionStatus();
+                        currentView.value = 'summary';
+                    }
+                };
+
+                const handleSingleQuestionResponse = (questionIndex, response) => {
+                    if (!currentSubCriterion.value.responses) {
+                        currentSubCriterion.value.responses = [];
+                    }
+                    currentSubCriterion.value.responses[questionIndex] = response;
+                };
+
+                const allQuestionsAnswered = () => {
+                    if (!currentSubCriterion.value || !currentSubCriterionData.value) return false;
+                    const responses = currentSubCriterion.value.responses || [];
+                    return responses.length === currentSubCriterionData.value.questions.length && 
+                           responses.every(r => r === 'Yes' || r === 'No');
+                };
+
+                const submitAllAnswers = async () => {
+                    if (allQuestionsAnswered()) {
+                        proposeSubCriterionEvaluation();
+                        
+                        // Auto-accept the proposed evaluation and save
+                        currentSubCriterion.value.evaluation = proposedSubCriterionEvaluation.value;
+                        await saveSubCriterionToDatabase();
+                        
+                        // Check if this is the last sub-criterion
+                        const nextIndex = selectedSubCriterionIndex.value + 1;
+                        if (nextIndex < currentCriterion.value.sub_criteria.length) {
+                            // Move to next sub-criterion
+                            selectedSubCriterionIndex.value = nextIndex;
+                            currentQuestionIndex.value = 0;
+                            proposedSubCriterionEvaluation.value = null;
+                            currentView.value = 'sub-criterion';
+                        } else {
+                            // Last sub-criterion completed, show criteria summary
+                            await updateCriterionStatus();
+                            currentView.value = 'summary';
+                        }
+                    }
+                };
+
+                const handleQuestionResponse = (response) => {
+                    // Keep for backward compatibility, but now redirects to new logic
+                    currentSubCriterion.value.responses[currentQuestionIndex.value] = response;
+                    const nextQuestion = currentQuestionIndex.value + 1;
+                    if (nextQuestion < currentSubCriterionData.value.questions.length) {
+                        currentQuestionIndex.value = nextQuestion;
+                    } else {
+                        proposeSubCriterionEvaluation();
+                        currentView.value = 'proposal';
+                    }
+                };
+                
+                const proposeSubCriterionEvaluation = () => {
+                    const subCriterion = currentSubCriterion.value;
+                    const isMust = /must/i.test(subCriterion.text);
+                    const responses = subCriterion.responses;
+                    let result = 'COMPLIANCE'; // Default
+
+                    const noCount = responses.filter(r => r === 'No').length;
+                    const totalQuestions = responses.length;
+                    const noPercentage = noCount / totalQuestions;
+
+                    if (isMust) {
+                        // For 'must' criteria, any 'No' is more serious
+                        if (noPercentage >= 0.5) result = 'DEFICIENCY';
+                        else if (noPercentage > 0.25) result = 'WEAKNESS';
+                        else if (noPercentage > 0) result = 'CONCERN';
+                        else result = 'COMPLIANCE';
+                    } else { // 'should' logic
+                        // For 'should' criteria, be more lenient
+                        if (noPercentage >= 0.75) result = 'WEAKNESS';
+                        else if (noPercentage >= 0.5) result = 'CONCERN';
+                        else result = 'COMPLIANCE';
+                    }
+                    proposedSubCriterionEvaluation.value = result;
+                };
+                
+                const acceptProposal = async (isManualOverride = false, manualValue = null) => {
+                    const evaluation = isManualOverride ? manualValue : proposedSubCriterionEvaluation.value;
+                    currentSubCriterion.value.evaluation = evaluation;
+                    
+                    // Save to database
+                    await saveSubCriterionToDatabase();
+                    
+                    // Check if this is the last sub-criterion
+                    const nextIndex = selectedSubCriterionIndex.value + 1;
+                    if (nextIndex < currentCriterion.value.sub_criteria.length) {
+                        // Move to next sub-criterion
+                        selectedSubCriterionIndex.value = nextIndex;
+                        currentQuestionIndex.value = 0;
+                        proposedSubCriterionEvaluation.value = null;
+                        currentView.value = 'sub-criterion';
+                    } else {
+                        // Last sub-criterion completed, show criteria summary
+                        await updateCriterionStatus();
+                        currentView.value = 'summary';
+                    }
+                };
+
+                const saveSubCriterionToDatabase = async () => {
+                    if (!currentEvaluation.value || selectedCriterionIndex.value === null || selectedSubCriterionIndex.value === null) {
+                        return;
+                    }
+                    
+                    try {
+                        const response = await fetch(
+                            `${API_BASE}/evaluations/${currentEvaluation.value.id}/criteria/${selectedCriterionIndex.value}/sub-criteria/${selectedSubCriterionIndex.value}`,
+                            {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    evaluation: currentSubCriterion.value.evaluation,
+                                    responses: currentSubCriterion.value.responses
+                                })
+                            }
+                        );
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                    } catch (error) {
+                        console.error('Error saving sub-criterion:', error);
+                        alert('Error saving progress. Please try again.');
+                    }
+                };
+
+                const updateCriterionStatus = async () => {
+                    // FIX: Add a guard clause to prevent errors when no criterion is selected.
+                    if (!currentCriterion.value) {
+                        return;
+                    }
+                    const criterion = currentCriterion.value;
+                    const allDone = criterion.sub_criteria.every(sc => sc.evaluation);
+                    if (allDone) {
+                        criterion.status = 'Completed';
+                        proposeOverallCriterionEvaluation();
+                    } else if (criterion.sub_criteria.some(sc => sc.evaluation)) {
+                        criterion.status = 'In Progress';
+                    } else {
+                         criterion.status = 'Not Started';
+                    }
+                    
+                    // Save criterion status to database
+                    await saveCriterionToDatabase();
+                };
+
+                const saveCriterionToDatabase = async () => {
+                    if (!currentEvaluation.value || selectedCriterionIndex.value === null) {
+                        return;
+                    }
+                    
+                    try {
+                        const response = await fetch(
+                            `${API_BASE}/evaluations/${currentEvaluation.value.id}/criteria/${selectedCriterionIndex.value}`,
+                            {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    status: currentCriterion.value.status,
+                                    evaluation: currentCriterion.value.evaluation,
+                                    justification: currentCriterion.value.justification
+                                })
+                            }
+                        );
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                    } catch (error) {
+                        console.error('Error saving criterion:', error);
+                        alert('Error saving criterion progress. Please try again.');
+                    }
+                };
+
+                const proposeOverallCriterionEvaluation = () => {
+                    const evals = currentCriterion.value.sub_criteria.map(sc => sc.evaluation);
+                    if (evals.includes('DEFICIENCY')) {
+                        currentCriterion.value.evaluation = 'DEFICIENCY';
+                    } else if (evals.includes('WEAKNESS')) {
+                        currentCriterion.value.evaluation = 'WEAKNESS';
+                    } else if (evals.includes('CONCERN')) {
+                        currentCriterion.value.evaluation = 'CONCERN';
+                    } else {
+                        currentCriterion.value.evaluation = 'COMPLIANCE';
+                    }
+                };
+                
+                const getOverallProgress = (evaluation) => {
+                    // Use database values if available, otherwise calculate from criteria
+                    if (evaluation.completedCriteria !== undefined && evaluation.totalCriteria !== undefined) {
+                        const completed = evaluation.completedCriteria;
+                        const total = evaluation.totalCriteria;
+                        return { completed, total, percentage: total > 0 ? (completed / total) * 100 : 0 };
+                    } else {
+                        const completed = evaluation.criteria.filter(c => c.status === 'Completed').length;
+                        const total = evaluation.criteria.length;
+                        return { completed, total, percentage: total > 0 ? (completed / total) * 100 : 0 };
+                    }
+                };
+                
+                const exportToText = () => {
+                    let text = `BAETE EVALUATION SUMMARY\n\n`;
+                    text += `Program: ${currentEvaluation.value.programName}\n`;
+                    text += `University: ${currentEvaluation.value.universityName}\n`;
+                    text += `Date: ${new Date().toLocaleDateString()}\n`;
+                    text += `========================================\n\n`;
+                    currentEvaluation.value.criteria.forEach((criterion, index) => {
+                        text += `CRITERION ${index + 1}: ${criterion.title}\n`;
+                        text += `Overall Evaluation: ${criterion.evaluation ? evaluationTypes[criterion.evaluation].text : 'Not Evaluated'}\n`;
+                        text += `Justification:\n${criterion.justification || 'No justification provided.'}\n\n`;
+                        text += `--- Sub-criteria Details ---\n`;
+                        criterion.sub_criteria.forEach((sc, sc_index) => {
+                            text += `${index + 1}.${sc_index + 1}: ${sc.text}\n`;
+                            text += `   Evaluation: ${sc.evaluation ? evaluationTypes[sc.evaluation].text : 'Not Evaluated'}\n`;
+                        });
+                        text += `--------------------------------\n\n`;
+                    });
+                    const blob = new Blob([text], { type: 'text/plain' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `BAETE_Evaluation_${currentEvaluation.value.programName.replace(/\s/g, '_')}.txt`;
+                    link.click();
+                    URL.revokeObjectURL(link.href);
+                };
+
+                // UI & NAVIGATION
+                const goToDashboard = () => { currentView.value = 'dashboard'; selectedEvaluationIndex.value = null; };
+                const goToCriteria = () => { currentView.value = 'criteria'; selectedCriterionIndex.value = null; updateCriterionStatus(); };
+                const goToProposal = () => { currentView.value = 'proposal'; };
+                const goToSubcriterionQuestion = () => { currentView.value = 'sub-criterion' };
+                const saveSummaryAndExit = async () => { 
+                    await saveCriterionToDatabase(); 
+                    goToCriteria(); 
+                };
+                const showFinalSummary = () => { currentView.value = 'final-summary'; };
+                const openModal = () => { newProgramName.value = ''; newUniversityName.value = ''; isModalOpen.value = true; };
+                const closeModal = () => { isModalOpen.value = false; };
+                const manualOverride = (value) => { acceptProposal(true, value); };
+
+                const showProposalView = () => {
+                    proposeSubCriterionEvaluation();
+                    currentView.value = 'proposal';
+                };
+
+                const goToPreviousSubCriterion = () => {
+                    if (selectedSubCriterionIndex.value > 0) {
+                        selectedSubCriterionIndex.value--;
+                        currentView.value = 'sub-criterion';
+                    }
+                };
+
+                const goToNextSubCriterion = () => {
+                    if (currentCriterion.value && selectedSubCriterionIndex.value < currentCriterion.value.sub_criteria.length - 1) {
+                        selectedSubCriterionIndex.value++;
+                        currentView.value = 'sub-criterion';
+                    }
+                };
+
+                const canGoPrevious = computed(() => {
+                    return selectedSubCriterionIndex.value > 0;
+                });
+
+                const canGoNext = computed(() => {
+                    return currentCriterion.value && selectedSubCriterionIndex.value < currentCriterion.value.sub_criteria.length - 1;
+                });
+
+
+                return {
+                    evaluations, currentView, selectedEvaluationIndex, isModalOpen, newProgramName, newUniversityName,
+                    proposedSubCriterionEvaluation, evaluationTypes, currentEvaluation, currentCriterion, currentSubCriterion,
+                    isCurrentSubCriterionMust, currentSubCriterionData, currentQuestionIndex,
+                    startNewEvaluation, selectEvaluation, selectCriterion, handleQuestionResponse, acceptProposal,
+                    saveSummaryAndExit, exportToText, goToDashboard, goToCriteria, showFinalSummary, openModal,
+                    closeModal, getOverallProgress, manualOverride, goToProposal, goToSubcriterionQuestion,
+                    handleSingleQuestionResponse, allQuestionsAnswered, submitAllAnswers, showProposalView,
+                    goToPreviousSubCriterion, goToNextSubCriterion, canGoPrevious, canGoNext
+                };
+            },
+            template: `
+                <!-- MODAL for New Evaluation -->
+                <div v-if="isModalOpen" id="app-modal" class="fixed inset-0 z-50 flex items-center justify-center animate-fade-in" @click.self="closeModal">
+                    <div class="card w-full max-w-md p-6 md:p-8" @click.stop>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Start New Evaluation</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="programName" class="block text-sm font-medium text-gray-700">Program Name</label>
+                                <input type="text" v-model="newProgramName" id="programName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2" placeholder="e.g., B.Sc. in Computer Science">
+                            </div>
+                            <div>
+                                <label for="universityName" class="block text-sm font-medium text-gray-700">University Name</label>
+                                <input type="text" v-model="newUniversityName" id="universityName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2" placeholder="e.g., University of Engineering">
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end space-x-3">
+                            <button @click="closeModal" class="btn-secondary py-2 px-4 rounded-md font-semibold">Cancel</button>
+                            <button @click="startNewEvaluation" class="btn-primary py-2 px-4 rounded-md font-semibold">Create</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD VIEW -->
+                <div v-if="currentView === 'dashboard'">
+                    <header class="main-header p-4 shadow-md">
+                        <div class="max-w-7xl mx-auto">
+                            <h1 class="text-2xl font-bold">Welcome, Evaluator</h1>
+                            <p class="text-sm opacity-90">BAETE Program Evaluator</p>
+                        </div>
+                    </header>
+                    <main class="max-w-7xl mx-auto p-4 md:p-6 animate-fade-in">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-4">Assigned Evaluations</h2>
+                        <div v-if="evaluations.length === 0" class="text-center py-10 card">
+                            <p class="text-gray-500">No evaluations started yet.</p>
+                        </div>
+                        <div v-else class="space-y-4">
+                            <div v-for="(evaluation, index) in evaluations" :key="index" @click="selectEvaluation(index)" class="card p-4 cursor-pointer">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800">{{ evaluation.programName }}</h3>
+                                        <p class="text-sm text-gray-500">{{ evaluation.universityName }}</p>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" :style="{ width: getOverallProgress(evaluation).percentage + '%' }"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">{{ getOverallProgress(evaluation).completed }} of {{ getOverallProgress(evaluation).total }} Criteria Completed</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <button @click="openModal" class="w-full btn-primary font-bold py-3 px-4 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                                Start New Evaluation
+                            </button>
+                        </div>
+                    </main>
+                </div>
+                
+                <!-- CRITERIA LIST VIEW -->
+                <div v-if="currentView === 'criteria' && currentEvaluation">
+                    <header class="main-header p-4 shadow-md">
+                        <div class="max-w-7xl mx-auto">
+                            <button @click="goToDashboard" class="flex items-center text-sm mb-2 opacity-90 hover:opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                Back
+                            </button>
+                            <h1 class="text-xl font-bold truncate">{{ currentEvaluation.programName }}</h1>
+                            <p class="text-sm opacity-90">Accreditation Criteria</p>
+                        </div>
+                    </header>
+                     <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-3 animate-fade-in">
+                        <div v-for="(criterion, index) in currentEvaluation.criteria" :key="index" @click="selectCriterion(index)" class="card p-4 cursor-pointer flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="bg-blue-100 text-blue-800 font-bold rounded-lg w-10 h-10 flex items-center justify-center mr-4">C{{ index + 1 }}</div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">{{ criterion.title }}</h3>
+                                    <span :class="['status-badge', 'status-' + criterion.status.toLowerCase().replace(' ', '-')]">{{ criterion.status }}</span>
+                                </div>
+                            </div>
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </div>
+                         <div class="mt-8">
+                            <button @click="showFinalSummary" :disabled="!currentEvaluation.criteria.every(c => c.status === 'Completed')" class="w-full btn-primary font-bold py-3 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed">
+                                View Final Summary
+                            </button>
+                        </div>
+                    </main>
+                </div>
+
+                <!-- QUESTION / PROPOSAL VIEW -->
+                <div v-if="(currentView === 'sub-criterion' || currentView === 'proposal' || currentView === 'override') && currentSubCriterion">
+                    <header class="main-header p-4 shadow-md">
+                        <div class="max-w-7xl mx-auto">
+                            <button @click="goToCriteria" class="flex items-center text-sm mb-2 opacity-90 hover:opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                Back to Criteria List
+                            </button>
+                            <h1 class="text-xl font-bold">Criterion {{ (selectedCriterionIndex || 0) + 1 }}: {{ currentCriterion.title }}</h1>
+                            <p class="text-sm opacity-90">Sub-criterion {{ (selectedCriterionIndex || 0) + 1 }}.{{ (selectedSubCriterionIndex || 0) + 1 }}</p>
+                        </div>
+                    </header>
+                    <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6 animate-fade-in">
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-blue-700 mb-3">Sub-criterion {{ (selectedCriterionIndex || 0) + 1 }}.{{ (selectedSubCriterionIndex || 0) + 1 }}</h3>
+                            <p class="text-gray-600 text-sm font-medium mb-2">Sub-criterion Text</p>
+                            <p class="text-gray-800 leading-relaxed">{{ currentSubCriterion.text }}</p>
+                        </div>
+                        
+                        <!-- Question View - All Questions Together -->
+                        <div v-if="currentView === 'sub-criterion'">
+                            <div class="card p-6">
+                                <h3 class="font-semibold text-gray-800 mb-4">Questions ({{ currentSubCriterionData.questions.length }} total)</h3>
+                                <div class="space-y-6">
+                                    <div v-for="(question, questionIndex) in currentSubCriterionData.questions" :key="questionIndex" class="border-l-4 border-blue-200 pl-4 py-2">
+                                        <h4 class="font-medium text-gray-700 mb-3">{{ questionIndex + 1 }}. {{ question }}</h4>
+                                        <div class="flex space-x-4">
+                                            <label class="flex items-center p-2 border rounded-lg cursor-pointer hover:bg-gray-50" :class="{'bg-green-50 border-green-300': currentSubCriterion.responses[questionIndex] === 'Yes'}">
+                                                <input type="radio" :name="'q' + questionIndex" value="Yes" @change="handleSingleQuestionResponse(questionIndex, 'Yes')" :checked="currentSubCriterion.responses[questionIndex] === 'Yes'" class="h-4 w-4 text-green-600 border-gray-300 focus:ring-green-500">
+                                                <span class="ml-2 text-gray-700">Yes</span>
+                                            </label>
+                                            <label class="flex items-center p-2 border rounded-lg cursor-pointer hover:bg-gray-50" :class="{'bg-red-50 border-red-300': currentSubCriterion.responses[questionIndex] === 'No'}">
+                                                <input type="radio" :name="'q' + questionIndex" value="No" @change="handleSingleQuestionResponse(questionIndex, 'No')" :checked="currentSubCriterion.responses[questionIndex] === 'No'" class="h-4 w-4 text-red-600 border-gray-300 focus:ring-red-500">
+                                                <span class="ml-2 text-gray-700">No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 space-y-3">
+                                    <button @click="submitAllAnswers()" :disabled="!allQuestionsAnswered()" class="w-full btn-primary font-bold py-3 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed">
+                                        Submit Answers & Continue
+                                    </button>
+                                    <button @click="showProposalView()" :disabled="!allQuestionsAnswered()" class="w-full btn-secondary font-medium py-2 px-4 rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed">
+                                        Review Proposed Evaluation First
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proposal View -->
+                        <div v-if="currentView === 'proposal' && proposedSubCriterionEvaluation" class="space-y-6">
+                            <div class="card p-6">
+                                 <h3 class="font-semibold text-gray-800 mb-2">Proposed Evaluation</h3>
+                                 <div class="border rounded-lg p-4" :class="evaluationTypes[proposedSubCriterionEvaluation].class.replace('eval-', 'bg-').replace('-800', '-100').replace('-900', '-100') + ' ' + evaluationTypes[proposedSubCriterionEvaluation].class.replace('eval-', 'border-').replace('-800', '-500').replace('-900', '-500')">
+                                     <h4 class="font-bold" :class="evaluationTypes[proposedSubCriterionEvaluation].class.replace('eval-', 'text-')">{{ evaluationTypes[proposedSubCriterionEvaluation].text }}</h4>
+                                     <p class="text-sm" :class="evaluationTypes[proposedSubCriterionEvaluation].class.replace('eval-', 'text-').replace('text-900', 'text-700')">{{ evaluationTypes[proposedSubCriterionEvaluation].desc }}</p>
+                                 </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="acceptProposal(false)" class="w-full btn-primary font-bold py-3 px-4 rounded-lg">Accept & Continue</button>
+                                <button @click="currentView = 'override'" class="w-full btn-secondary font-bold py-3 px-4 rounded-lg">Override & Choose Manually</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Override View -->
+                        <div v-if="currentView === 'override'" class="space-y-6">
+                             <div class="card p-6">
+                                <h3 class="font-semibold text-gray-800 mb-4">Select Evaluation Manually:</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div v-for="(type, key) in evaluationTypes" :key="key" @click="manualOverride(key)"
+                                        class="p-4 border rounded-lg cursor-pointer hover:shadow-md text-center"
+                                        :class="type.class.replace('eval-','border-')">
+                                        <h4 class="font-bold" :class="type.class.replace('eval-','text-')">{{ type.text }}</h4>
+                                    </div>
+                                </div>
+                             </div>
+                             <button @click="goToProposal" class="w-full btn-secondary font-bold py-3 px-4 rounded-lg">Back to Proposal</button>
+                        </div>
+
+                        <!-- Sub-criterion Navigation Buttons -->
+                        <div class="flex justify-between items-center mt-8 pt-6 border-t">
+                            <button @click="goToPreviousSubCriterion()" :disabled="!canGoPrevious" class="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                Previous Sub-criterion
+                            </button>
+                            <span class="text-sm text-gray-600">
+                                {{ (selectedSubCriterionIndex || 0) + 1 }} of {{ currentCriterion ? currentCriterion.sub_criteria.length : 0 }}
+                            </span>
+                            <button @click="goToNextSubCriterion()" :disabled="!canGoNext" class="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                Next Sub-criterion
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                            </button>
+                        </div>
+                    </main>
+                </div>
+                
+                <!-- CRITERION SUMMARY VIEW -->
+                <div v-if="currentView === 'summary' && currentCriterion">
+                     <header class="main-header p-4 shadow-md">
+                        <div class="max-w-7xl mx-auto">
+                           <h1 class="text-xl font-bold">Summary for Criterion {{ (selectedCriterionIndex || 0) + 1 }}: {{ currentCriterion.title }}</h1>
+                        </div>
+                    </header>
+                    <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6 animate-fade-in">
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-800 mb-4">Sub-criteria Evaluations</h3>
+                            <ul class="space-y-2">
+                                <li v-for="(sc, index) in currentCriterion.sub_criteria" :key="index" class="flex justify-between items-center p-2 border-b">
+                                    <span class="text-gray-600">Sub-criterion {{ (selectedCriterionIndex || 0) + 1 }}.{{ index + 1 }}</span>
+                                    <span class="evaluation-badge" :class="evaluationTypes[sc.evaluation].class">{{ evaluationTypes[sc.evaluation].text }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card p-6">
+                             <h3 class="font-semibold text-gray-800 mb-2">Proposed Overall Evaluation</h3>
+                             <div class="border rounded-lg p-4" :class="evaluationTypes[currentCriterion.evaluation].class.replace('eval-', 'bg-').replace('-800', '-100').replace('-900', '-100') + ' ' + evaluationTypes[currentCriterion.evaluation].class.replace('eval-', 'border-').replace('-800', '-500').replace('-900', '-500')">
+                                 <h4 class="font-bold" :class="evaluationTypes[currentCriterion.evaluation].class.replace('eval-', 'text-')">{{ evaluationTypes[currentCriterion.evaluation].text }}</h4>
+                                 <p class="text-sm" :class="evaluationTypes[currentCriterion.evaluation].class.replace('eval-', 'text-').replace('text-900', 'text-700')">{{ evaluationTypes[currentCriterion.evaluation].desc }}</p>
+                             </div>
+                        </div>
+                        <div class="card p-6">
+                            <label for="justification" class="block text-lg font-semibold text-gray-800 mb-2">Overall Justification</label>
+                            <textarea v-model="currentCriterion.justification" id="justification" rows="5" class="w-full rounded-md border-gray-300 shadow-sm p-2" placeholder="Provide a holistic justification for the overall evaluation of this criterion..."></textarea>
+                        </div>
+                        <button @click="saveSummaryAndExit" class="w-full btn-primary font-bold py-3 px-4 rounded-lg">Save & Return to Criteria</button>
+                    </main>
+                </div>
+                
+                <!-- FINAL SUMMARY VIEW -->
+                <div v-if="currentView === 'final-summary' && currentEvaluation">
+                    <header class="main-header p-4 shadow-md">
+                        <div class="max-w-7xl mx-auto">
+                             <button @click="goToCriteria" class="flex items-center text-sm mb-2 opacity-90 hover:opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                Back
+                            </button>
+                           <h1 class="text-xl font-bold">Final Evaluation Summary</h1>
+                           <p class="text-sm opacity-90">{{ currentEvaluation.programName }}</p>
+                        </div>
+                    </header>
+                    <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-4 animate-fade-in">
+                        <div v-for="(criterion, index) in currentEvaluation.criteria" :key="index" class="card p-4">
+                             <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-bold text-lg text-gray-800">C{{ index + 1 }}: {{ criterion.title }}</h3>
+                                <span v-if="criterion.evaluation" class="evaluation-badge" :class="evaluationTypes[criterion.evaluation].class">{{ evaluationTypes[criterion.evaluation].text }}</span>
+                            </div>
+                            <p class="text-sm text-gray-600 bg-gray-50 p-3 rounded-md">{{ criterion.justification || 'No justification provided.' }}</p>
+                        </div>
+                        <button @click="exportToText" class="w-full btn-primary font-bold py-3 px-4 rounded-lg">Export as Text</button>
+                    </main>
+                </div>
+            `
+        };
+
+        createApp(App).mount('#app');
+    </script>
+</body>
+</html>
+
