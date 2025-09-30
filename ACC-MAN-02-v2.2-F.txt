@@ -1,0 +1,210 @@
+﻿Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+1.0 PURPOSE OF THIS DOCUMENT 
+The purpose of this document is to describe the ten accreditation criteria that are the basis for evaluating a  program by the Board of Accreditation for Engineering and Technical Education (BAETE) of the Institution of  Engineers, Bangladesh (IEB). 
+2.0 SCOPE OF THIS DOCUMENT 
+The accreditation criteria presented here apply to the Higher Educational Institutions (HEI) which offer undergraduate engineering programs in Bangladesh. 
+3.0 ROLES AND RESPONSIBILITIES 
+3.1 Engineering programs applying for BAETE Accreditation 
+• Prepare a Self-assessment report (SAR) based on the ten accreditation criteria. The Self assessment report template for the programs must be prepared as per ACC-TMP-04-04 (V2.1 – effective till 30 June 2026; V3.0 – effective from 1 July 2025; programs may apply using template  V2.1 or V3.0 between 1 July 2025 and 30 June 2026). 
+3.2 BAETE 
+• Conducts the program evaluation based on the accreditation criteria presented in this document. 4.0 DEFINITIONS AND ACRONYMS 
+See ACC-MAN-06 for definitions and acronyms. 
+5.0 ACCREDITATION CRITERIA 
+This section presents the ten accreditation criteria which are the basis for evaluating a program for  accreditation. The following sub-sections sequentially outline the required and desired attributes of each  criterion in terms of sub-criteria. Required attributes are indicated through the word must, while the desired  attributes are indicated through the word should. This section does not provide any quantitative bench-mark  requirement to satisfy a criterion or sub-criterion adequately or appropriately. Adequacy or appropriateness  is to be decided qualitatively in consideration of what is necessary for the students to attain the outcomes. It  should be noted that no sub-criterion is assigned any weight. Each criterion is to be holistically evaluated in  terms of the qualitative bench-mark requirements. The evaluation teams shall prepare the reports as per ACC TMP-04-05. 
+5.1 Organization and Governance 
+Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. Major positions of the institution must be filled. These positions include Vice Chancellor, Pro-Vice  Chancellor, Treasurer, Dean, and Chairperson. 
+ii. The statutory bodies/committees of the institution must be formed in accordance with the applicable  rules and guidelines. These bodies/committees include the Board of Trustees, Syndicate, Academic  Council, Admission Committee, Finance Committee, Curriculum Committee, and the Faculty  Selection Committee.
+Page 1 of 9 
+  
+
+Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+iii. The position appointees and committee members must function effectively as per the roles defined  in the relevant act/statute. 
+iv. The institution must have published policies, including a mechanism for addressing grievances,  regarding academic and administrative matters involving students, faculty members and non teaching employees.  
+v. The academic and administrative policies must be put into practice. 
+5.2 Financial and Physical Resources 
+Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. The financial resources of the institution must be adequate to fulfill its mission and vision. The  financial resources committed to the program must also be adequate for the appropriate functioning  of the program, including recruiting and retaining qualified faculty members, and procuring the  necessary lab equipment and equipment and tools to support teaching and learning. 
+ii. The institution must have a process for budget planning and allocate resources to the priority areas  as required.  
+iii. The campus infrastructure, such as the extent of the land and built-up area, extra- and co-curricular  facilities, and support facilities, including maintenance support for infrastructure and facilities, must  be adequate for the total number of students and employees at the institution. 
+iv. The possibility of any risk from manmade or natural hazards should be properly assessed and  addressed in the Safety Plan, which must address safety issues as the situation demands. Adequate  measures must be in place to make the campus safe for students, employees and visitors. v. Fire detection and firefighting facilities must be adequate.  
+vi. All labs must have their own plans to prevent and manage incidents and accidents. 5.3 Faculty 
+Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. The department must have a sufficient number of full-time faculty members to ensure that the faculty  are not overloaded with courses and that the program does not become overly dependent on part time faculty members.  
+ii. The proportion of senior faculty members and junior faculty members should be appropriate.  iii. Adequate interaction between students and faculty members both within and outside classes is  essential. The teacher-student ratio, class size and teaching load must not compromise opportunities  for interaction. 
+iv. The faculty members must have adequate academic qualifications with specializations in areas  closely related to the program(s) offered by the department.  
+v. Faculty members should be motivated to improve their pedagogy and assist the students in achieving  outcomes. They should be committed to the continuous quality improvement activities of the  department. 
+vi. Faculty members must have the responsibility and authority to design and update the curriculum,  establish course and program outcomes, and select and use appropriate assessment tools for  evaluating student performance in classes and the achievement of outcomes.
+Page 2 of 9 
+  
+
+Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+vii. Faculty members must be engaged in research, development and professional activities such as  consulting. They should also be involved in relevant professional societies. The results of these  activities should benefit the students. 
+viii. The institution or department must periodically arrange training for the faculty members on outcome based education and assessment. All the faculty members must be adequately trained on how to  establish course outcomes, conduct teaching-learning activities that are appropriate for the  outcomes and assess the level of outcome achievement. 
+5.4 Students 
+Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. There must be a published policy for the admission and transfer of students into the program. The  admission or transfer requirements should be appropriate for the selection of students with the  potential to achieve the program’s outcomes.  
+ii. The policy must be implemented in practice. Transfer students must also show the attainment of  program outcomes from courses in the institution. 
+iii. Students’ academic performance must be continuously monitored in terms of the achievement of  outcomes, and feedback should be provided to the students. There should be provisions for remedial  or corrective measures when necessary.  
+iv. Every student must be assigned an advisor. The advisor should counsel, guide and mentor the  student on all academic and professional matters. 
+v. Students must have opportunities to participate in extra- and co-curricular activities and the activities  of relevant professional societies. The institution should ensure the participation of a significant  number of students. 
+5.5 Academic Facilities and Technical Support 
+Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. The institution must have a well-stocked library. The books, e-books, journals and other resources  available in the library should be adequate for the program and the faculty members.  
+ii. The number of classrooms available must be adequate to properly run the program. The classroom  facilities and the environment should be conducive to learning. 
+iii. The number of laboratories and equipment must be adequate for conducting the program’s various  laboratory courses.  
+iv. Every student must have the opportunity for hands-on activity in the laboratories.  v. Students and faculty members must have access to adequate computing and Internet facilities,  including hardware, software tools and support. 
+5.6 Curriculum and Teaching-Learning Processes 
+Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. The curriculum must satisfy the relevant program-specific criteria. 
+ii. The breadth and depth of the curriculum must be appropriate for solving complex engineering  problems in the relevant discipline.
+Page 3 of 9 
+  
+
+Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+iii. The curriculum must contain an adequate number of courses on mathematics, physical science,  humanities and non-engineering subjects. 
+iv. The teaching-learning processes and activities selected for each course must be effective and  appropriate for achieving the relevant outcomes including solution of complex engineering problems  and activities, if applicable. 
+v. Adequate hands-on activities must be an integral part of teaching and learning. Learning should be  enhanced through student participation. 
+vi. The program must demonstrate the culmination of program outcomes (POs) at the level of solving  complex engineering problems, preferably through a final-year design project or capstone project  extending over a period of one year. 
+5.7 Program Educational Objectives 
+Program Educational Objectives (PEOs) are broad statements that describe the career and professional  accomplishments that the program is preparing graduates to achieve. PEOs are assessable based on the  attributes and accomplishments of graduates, preferably those who have worked for 3 to 5 years after  graduation. Requirements and desirable attributes under this criterion are described in terms of the following  sub-criteria.  
+i. Published PEOs must be clear, concise, assessable and realistic within the context of the available  resources. 
+ii. PEOs must be consistent with the vision and mission of the institution or the department offering the  program. 
+iii. Curriculum and teaching-learning processes must support the attainment of PEOs. Justifications  must be provided for how these contribute to the attainment of the PEOs. 
+iv. A process must be developed to assess the level of attainment of each PEO to evaluate the  academic program’s effectiveness. Adequate evidence and documentation on the assessment of  PEO attainment must be provided. The assessment tools should be indicated, and the way in which  these tools are used should be explained.  
+v. PEO assessment must lead to the periodic review of PEOs. 
+5.8 Program Outcomes and Assessment 
+Program Outcomes (POs) or graduate attributes are narrower statements that describe what students are  expected to know and be able to do by the time of graduation. These statements relate to the knowledge,  skills and attitudes acquired by students while progressing through the program. The program must  demonstrate that by the time of graduation, students have achieved an acceptable minimum level of certain  knowledge, skills and behavioral traits. The BAETE specifically requires that students acquire the following  graduate attributes: 
+a) Apply knowledge of mathematics, natural science, engineering fundamentals and an engineering  specialization as specified in K1 to K4 respectively to the solution of complex engineering problems. b) Identify, formulate, research literature and analyse complex engineering problems reaching  substantiated conclusions using first principles of mathematics, natural sciences and engineering  sciences. (K1 to K4)
+Page 4 of 9 
+  
+
+Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+c) Design solutions for complex engineering problems and design systems, components or processes  that meet specified needs with appropriate consideration for public health and safety, cultural,  societal, and environmental considerations. (K5) 
+d) Conduct investigations of complex problems using research-based knowledge (K8) and research  methods including design of experiments, analysis and interpretation of data, and synthesis of  information to provide valid conclusions.  
+e) Create, select and apply appropriate techniques, resources, and modern engineering and IT tools,  including prediction and modelling, to complex engineering problems, with an understanding of the  limitations. (K6) 
+f) Apply reasoning informed by contextual knowledge to assess societal, health, safety, legal and  cultural issues and the consequent responsibilities relevant to professional engineering practice and  solutions to complex engineering problems. (K7) 
+g) Understand and evaluate the sustainability and impact of professional engineering work in the  solution of complex engineering problems in societal and environmental contexts. (K7) h) Apply ethical principles and commit to professional ethics and responsibilities and norms of  engineering practice. (K7) 
+i) Function effectively as an individual, and as a member or leader in diverse teams and in multi disciplinary settings. 
+j) Communicate effectively on complex engineering activities with the engineering community and with  society at large, such as being able to comprehend and write effective reports and design  documentation, make effective presentations, and give and receive clear instructions. 
+k) Demonstrate knowledge and understanding of engineering management principles and economic  decision-making and apply these to one’s own work, as a member and leader in a team, to manage  projects and in multidisciplinary environments. 
+l) Recognize the need for, and have the preparation and ability to engage in independent and life-long  learning in the broadest context of technological change. 
+In addition to incorporating the above-listed POs (graduate attributes), the educational institution may include  additional outcomes in its learning programs. An engineering program that aims to attain the abovementioned  POs must ensure that its curriculum encompasses all the attributes of the Knowledge Profile (K1 – K8) as  presented in Table 5.8.1 and as included in the PO statements. The ranges of Complex Problem Solving (P1  – P7) and Complex Engineering Activities (A1 – A5) are given in Tables 5.8.2 and 5.8.3, respectively. 
+Table 5.8.1: Knowledge Profile 
+Attribute 
+K1 A systematic, theory-based understanding of the natural sciences applicable to the discipline  K2 Conceptually based mathematics, numerical analysis, statistics and the formal aspects of  computer and information science to support analysis and modeling applicable to the discipline  K3 A systematic, theory-based formulation of engineering fundamentals required in the engineering  discipline  
+K4 Engineering specialist knowledge that provides theoretical frameworks and bodies of knowledge  for the accepted practice areas in the engineering discipline; much is at the forefront of the  discipline 
+K5 Knowledge that supports engineering design in a practice area 
+Page 5 of 9 
+  
+
+Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+K6 Knowledge of engineering practice (technology) in the practice areas in the engineering  discipline  
+K7 Comprehension of the role of engineering in society and identified issues in engineering practice  in the discipline: ethics and the engineer’s professional responsibility to public safety; the impacts  of engineering activity; economic, social, cultural, environmental and sustainability K8 Engagement with selected knowledge in the research literature of the discipline  
+Table 5.8.2: Range of Complex Engineering Problem Solving 
+Attribute Complex Engineering Problems have characteristic P1 and some  or all of P2 to P7: 
+Depth of knowledge required P1: Cannot be resolved without in-depth engineering knowledge at  the level of one or more of K3, K4, K5, K6 or K8 which allows a  
+fundamentals-based, first principles analytical approach 
+Range of conflicting requirements P2: Involve wide-ranging or conflicting technical, engineering and  other issues 
+Depth of analysis required P3: Have no obvious solution and require abstract thinking,  originality in analysis to formulate suitable models 
+Familiarity of issues P4: Involve infrequently encountered issues Extent of applicable codes P5: Are outside problems encompassed by standards and codes of  practice for professional engineering 
+Extent of stakeholder involvement and  conflicting requirements 
+P6: Involve diverse groups of stakeholders with widely varying  needs 
+Interdependence P7: Are high-level problems including many component parts or  sub-problems 
+Table 5.8.3: Range of Complex Engineering Activities 
+Attribute Complex activities means (engineering) activities or projects that  have some or all of the following characteristics: 
+Range of resources A1: Involve the use of diverse resources (and for this purpose  resources include people, money, equipment, materials, information  
+and technologies) 
+Level of interaction A2: Require resolution of significant problems arising from interactions  between wide-ranging or conflicting technical, engineering or other  
+issues 
+Innovation A3: Involve creative use of engineering principles and research-based  knowledge in novel ways 
+Consequences for society and the  environment 
+A4: Have significant consequences in a range of contexts,  characterized by difficulty of prediction and mitigation 
+Familiarity A5: Can extend beyond previous experiences by applying principles based approaches
+Page 6 of 9 
+  
+
+Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. POs specified by the program must be significantly equivalent to the twelve graduate attributes or  POs of BAETE. 
+ii. POs must contribute to each PEO. 
+iii. The process involved in defining and refining the POs must be described. The correlation between  the course outcomes (COs) and POs must be demonstrated through the mapping of COs onto POs. iv. The way in which each attribute of the Knowledge Profile (K1 – K8) is addressed in the curriculum  must be demonstrated through mapping. The program must also demonstrate how the attributes of  
+the Range of Complex Engineering Problems (P1 – P7) and Complex Engineering Activities (A1 – A5) are incorporated in the teaching, learning and assessment. 
+v. A course file must be maintained for each course. The course file should include the assessment of  outcomes, curriculum, examination questions and answer scripts, other assessment tools and  samples of corresponding student works, and a summary of performance and attainment of course  outcomes with suggestions or feedback for future development. 
+vi. POs must be assessed using direct methods. Direct methods of assessment are accomplished  through the direct examination or observation of students’ knowledge or skills against measurable  performance indicators or rubrics. In addition, indirect methods may also be used for PO  assessment. Indirect methods of assessment are based on opinions or self-reports from different  stakeholders. The way in which various assessment tools, including examinations and rubrics,  contribute to the evaluation of attainment of each PO must be described. The results of the evaluation  of PO attainment must be shown. 
+vii. It must be demonstrated through evidence from appropriate evaluation that the students attain all  the POs by the time of the graduation. 
+5.9 Continuous Quality Improvement 
+The program must have a continuous quality improvement mechanism. Requirements and desirable attributes  under this criterion are described in terms of the following sub-criteria. 
+i. The program must demonstrate an established system for periodically compiling the level of  attainment of PEOs, including a mechanism for tracking and obtaining feedback from graduates and  their employers. 
+ii. The findings of the CQI exercises for PEOs must be evaluated, and the identified shortcomings and  limitations must be used to refine and improve the program. 
+iii. POs must be assessed on a regular cycle. The program must prepare CQI file for each of the 12  POs to review considering feedback from relevant stakeholders including graduates. 
+iv. Each course must have clear quality requirements and facilitate the achievement of COs through  teaching-learning and assessment methods.  
+v. The concerned course instructor must prepare course review reports including CQI files for the  courses he/she is teaching. 
+vi. The program must evaluate the curriculum and teaching quality on a regular basis while considering  feedback from faculty members and students. The program must demonstrate that the results of this  periodic evaluation are used for continuous improvement.
+Page 7 of 9 
+  
+
+Document Number: ACC-MAN-02   
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+5.10 Interactions with the Industry 
+A communication channel between the educational institution and the industry should be in place. The industry  should be encouraged to provide feedback concerning the quality of the teaching-learning process.  Requirements and desirable attributes under this criterion are described in terms of the following sub-criteria. 
+i. The industry must participate in the development of the curriculum to ensure that it is relevant,  regularly updated, and meets the needs of the industry, particularly in areas experiencing rapid  changes. 
+ii. The program should have an Industry Advisory Panel (IAP) and an Alumni Association (AA) for this  purpose. The IAP or AA may meet at certain intervals with the department to provide feedback. iii. The program must provide students with the opportunity to obtain industrial experience through  
+internships, industry visits or design projects conducted by practicing engineers and faculty members  with industrial experience. 
+6.0 THE BAETE ACCREDITATION MANUAL, STANDARD OPERATING PROCEDURES, TEMPLATES,  FLOWCHARTS, SCHEDULE, AND WORK INSTRUCTIONS 
+See ACC-MAN-00 for details.
+Page 8 of 9 
+
+Document Number: ACC-MAN-02 
+Version Number: 2.2 
+Effective Date: 01 July 2024 
+ACCREDITATION CRITERIA 
+7.0 REVISION HISTORY 
+Date Version Description of Change 
+23 March 2017 1.0 Initial Release 
+05 March 2019 2.0 Year-long Final Year Design Project or Capstone Project is no longer obligatory  in the curriculum. Demonstration of culminated POs in solving complex  
+engineering problems remains required, and the year-long Final Year Design  
+Project or Capstone Project is the preferred method. 
+The descriptions of POs have been updated following IEA Version 3.21, June  
+2013. Requirements of the Knowledge Profiles (K1-K8) have been explicitly  
+mentioned in the description of each PO.  
+The tables describing the Range of Complex Engineering Problem-Solving and  
+Range of Complex Engineering Activities have been updated following IEA  
+Version 3.21, June 2013. 
+The program should map out how each attribute of the Knowledge Profile (K1 – 
+K8) is addressed in the curriculum. The program should also demonstrate how  
+each attribute of the Range of Complex Engineering Problems (P1 – P7) and  
+Complex Engineering Activities (A1 – A5) is incorporated in teaching, learning  
+and assessment. 
+Results of evaluation of PO attainment should be reported. 
+16 May 2022 2.1 The required and desired attributes of each of the ten criteria, in terms of sub criteria, has been listed. The required attributes are indicated through the word  
+must, while the desired attributes are indicated through the word should. 
+Section 4.8: Titles for the POs have been removed.  
+Reference to Annex III Evaluation Team Report (ETR) template has been  
+added in the first paragraph of chapter 4. 
+23 April 2024 2.2 Released as a standalone document; purpose and scope of the document  added; roles and responsibilities added; definitions and acronyms added; no  
+changes in the criteria/sub-criteria level.
+Page 9 of 9

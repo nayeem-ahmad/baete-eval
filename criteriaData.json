@@ -3,24 +3,24 @@
         "title": "Organization and Governance",
         "sub_criteria": [
             {
-                "text": "Major positions of the institution must be filled.",
-                "questions": ["Are major positions of the institution filled?"]
+                "text": "Major positions of the institution must be filled. These positions include Vice Chancellor, Pro-Vice Chancellor, Treasurer, Dean, and Chairperson.",
+                "questions": ["Are major positions of the institution filled (Vice Chancellor, Pro-Vice Chancellor, Treasurer, Dean, and Chairperson)?"]
             },
             {
-                "text": "The statutory bodies/committees of the institution must be formed in accordance with the applicable rules and guidelines.",
-                "questions": ["Are the statutory bodies/committees of the institution formed in accordance with the applicable rules and guidelines?"]
+                "text": "The statutory bodies/committees of the institution must be formed in accordance with the applicable rules and guidelines. These bodies/committees include the Board of Trustees, Syndicate, Academic Council, Admission Committee, Finance Committee, Curriculum Committee, and the Faculty Selection Committee.",
+                "questions": ["Are the statutory bodies/committees of the institution formed in accordance with applicable rules and guidelines?", "Are all required bodies/committees established (Board of Trustees, Syndicate, Academic Council, etc.)?"]
             },
             {
                 "text": "The position appointees and committee members must function effectively as per the roles defined in the relevant act/statute.",
-                "questions": ["Do the position appointees and committee members function effectively as per the roles defined in the relevant act/statute?"]
+                "questions": ["Do position appointees function effectively as per their defined roles?", "Do committee members perform their duties according to relevant acts/statutes?"]
             },
             {
-                "text": "The institution must have published policies including a mechanism for addressing grievance.",
-                "questions": ["Does the institution have published policies?", "Does the institution have a mechanism for addressing grievance?"]
+                "text": "The institution must have published policies, including a mechanism for addressing grievances, regarding academic and administrative matters involving students, faculty members and non-teaching employees.",
+                "questions": ["Does the institution have published policies for academic matters?", "Does the institution have published policies for administrative matters?", "Is there a mechanism for addressing grievances for students, faculty, and non-teaching staff?"]
             },
             {
                 "text": "The academic and administrative policies must be put into practice.",
-                "questions": ["Are the academic and administrative policies put into practice?"]
+                "questions": ["Are the academic policies implemented in practice?", "Are the administrative policies implemented in practice?"]
             }
         ]
     },
